@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        #game-board {
+            width: 400px;
+            height: 400px;
+            border: 1px solid black;
+            position: relative;
+            background-color: #000;
+            touch-action: none; /* Prevents browser's default touch behavior */
+        }
+        .snake-part {
+            width: 20px;
+            height: 20px;
+            background-color: #00ff00;
+            position: absolute;
+        }
+        #food {
+            width: 20px;
+            height: 20px;
+            background-color: #ff0000;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-board"></div>
+    <script>
+        // ... (same as before)
+
+        // Variables to keep track of the touch start position
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        // Handle touch start
+        gameBoard.addEventListener('touchstart', event => {
+            touchStartX = event.touches[0].clientX;
+            touchStartY = event.touches[0].clientY;
+        });
+
+        // Handle touch end
+        gameBoard.addEventListener('touchend', event => {
+            const touchEndX = event.changedTouches[0].clientX;
+            const touchEndY = event.changedTouches[0].clientY;
+            const diffX = touchEndX - touchStartX;
+            const diffY = touchEndY - touchStartY;
+
+            // Determine swipe direction
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                if (diffX > 0 && velocity.x === 0) velocity = { x: 1, y: 0 };
+                else if (diffX < 0 && velocity.x === 0) velocity = { x: -1, y: 0 };
+            } else {
+                if (diffY > 0 && velocity.y === 0) velocity = { x: 0, y: 1 };
+                else if (diffY < 0 && velocity.y === 0) velocity = { x: 0, y: -1 };
+            }
+        });
+
+        // ... (rest of the code remains the same)
+    </script>
+</body>
+</html>
